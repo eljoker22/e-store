@@ -1,0 +1,24 @@
+.product{
+    display: flex;
+    justify-content: space-between;
+}
+.imgCont, .contentSide{
+    width: 48%;
+}
+.imgCont{
+    position: relative;
+    height: 500px;
+}
+.price{
+    font-weight: 600;
+    color: #333;
+    margin-top: 10px;
+}
+@media (max-width: 768px) {
+    .product{
+        display: block;
+    }
+    .imgCont, .contentSide{
+        width: 100%;
+    }
+}
