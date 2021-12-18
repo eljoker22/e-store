@@ -31,5 +31,5 @@ button{
   color: var(--primary) !important;
 }
 .css-eg0mwd-MuiSlider-thumb:hover, .css-eg0mwd-MuiSlider-thumb.Mui-focusVisible, .css-eg0mwd-MuiSlider-thumb.Mui-active{
-    box-shadow: 0px 0px 0px 8px #ffb31940;
+    box-shadow: 0px 0px 0px 8px #ffb31940 !important;
 }

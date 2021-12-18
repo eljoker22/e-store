@@ -8,8 +8,8 @@
 }
 .btnProduct{
   background: var(--primary);
-  margin: 5px -15px -15px -15px;
-  color: #fff;
+  margin: 5px -15px -15px -15px !important;
+  color: #fff !important;
   text-align: center;
   padding: 10px;
   width: 115%;
