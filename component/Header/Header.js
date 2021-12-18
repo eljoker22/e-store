@@ -7,7 +7,7 @@ import Container from '@mui/material/Container';
 import SearchIcon from '@mui/icons-material/Search';
 import useMediaQuery from '@mui/material/useMediaQuery'
 import Link from 'next/link'
-import classes from './header.module.css';
+import classes from '../../styles/header.module.css';
 import MenuIcon from '@mui/icons-material/Menu';
 import IconButton from '@mui/material/IconButton'
 import {CartContext} from '../context/CartContext'
