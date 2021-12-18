@@ -22,7 +22,9 @@ function Header() {
         <AppBar style={{background: 'var(--primary)'}}>
             <Container>
             <Toolbar style={{padding: '0', justifyContent: 'space-between'}}>
+                <Link href="/">
                 <Typography variant="h6" style={{fontWeight: 'bold', cursor: 'pointer'}}>E-STORE.</Typography>
+                </Link>
                 {!mediaQuery &&
                 <>
                 <div className={classes.menuContainer}>

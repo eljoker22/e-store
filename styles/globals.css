@@ -7,14 +7,9 @@ body {
   background: var(--background);
   color: #333;
 }
-/* 
-oange #ffb319 
-pink  #EC255A
-
-*/
 :root{
   --background: #eee;
-  --primary: #FF3F00;
+  --primary: #0779E4;
 }
 a {
   color: inherit;
