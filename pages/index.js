@@ -75,7 +75,7 @@ export default function Home({products, categories}) {
     }
     filterProducts();
 
-  }, [activeCat, priceVal])
+  }, [activeCat, priceVal, products])
 
   return (
     <>
@@ -105,7 +105,7 @@ export default function Home({products, categories}) {
                 </ListItemButton>
               </ListItem>
           { categories.map((cat) => {
-            return <ListItem style={{padding: '0px'}}>
+            return <ListItem key={cat} style={{padding: '0px'}}>
                     <ListItemButton style={{padding: '0'}} onClick={() => handleCategory(cat)}>
                       <ListItemIcon>
                         <Checkbox 
@@ -188,7 +188,7 @@ export default function Home({products, categories}) {
                 </ListItemButton>
               </ListItem>
           { categories.map((cat) => {
-            return <ListItem style={{padding: '0px'}}>
+            return <ListItem key={cat} style={{padding: '0px'}}>
                     <ListItemButton style={{padding: '0'}} onClick={() => handleCategory(cat)}>
                       <ListItemIcon>
                         <Checkbox 
