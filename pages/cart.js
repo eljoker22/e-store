@@ -23,12 +23,6 @@ function Cart() {
     const {cartItems, handleCount, removeProduct, prices} = useContext(CartContext);
     const mediaQuery = useMediaQuery('(max-width: 768px)');
 
-    const createCheckOutSession = async () => { // create session
-        const stripe = await stripePromise;
-        const checkoutSession = await axios.post('/api/create-stripe-session', {
-            priceID: 'price_1KC9fpFbFN1vjDJpLeAZHUiz'
-        });
-    }
 
     return(
         <>
@@ -98,12 +92,14 @@ function Cart() {
                         <strong>Total</strong>
                         <strong>{`${(prices + 10).toFixed(2)}$`}</strong>
                     </Typography>
-                    <Button 
-                        onClick={createCheckOutSession}
-                        variant="contained" 
-                        fullWidth={true}>
-                        <strong>Make Order</strong>
-                    </Button>
+                        <form action="/api/create-stripe-session" method="POST"> 
+                            <Button 
+                            type="submit"
+                            variant="contained" 
+                            fullWidth={true}>
+                            <strong>Make Order</strong>
+                            </Button>
+                        </form>
                 </Paper>
             </Grid>
         </Grid>}
