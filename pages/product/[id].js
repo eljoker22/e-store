@@ -10,6 +10,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import useMediaquery from '@mui/material/useMediaQuery'
 
 
+
 export async function getStaticPaths() {
     const res = await fetch('https://fakestoreapi.com/products');
     const data = await res.json();
@@ -49,7 +50,7 @@ function Product({product}) {
             setLoading(false);
         }, 2000)
     }
-
+    console.log(product)
     return(
     <dev className={classes.product}>
         <div className={classes.imgCont} style={{marginBottom: mediaQuery && '30px'}}>

@@ -11,10 +11,25 @@ import IconButton from '@mui/material/IconButton';
 import classes from '../styles/cart.module.css';
 import Image from 'next/image';
 import useMediaQuery from '@mui/material/useMediaQuery'
+import { loadStripe } from '@stripe/stripe-js';
+import axios from 'axios';
+
+const stripePromise = loadStripe(
+    `${process.env.STRIPE_PUBLISHBLE_KEY}`
+);
 
 function Cart() {
+
     const {cartItems, handleCount, removeProduct, prices} = useContext(CartContext);
     const mediaQuery = useMediaQuery('(max-width: 768px)');
+
+    const createCheckOutSession = async () => { // create session
+        const stripe = await stripePromise;
+        const checkoutSession = await axios.post('/api/create-stripe-session', {
+            priceID: 'price_1KC9fpFbFN1vjDJpLeAZHUiz'
+        });
+    }
+
     return(
         <>
         <h1>Shoping Cart</h1>
@@ -83,7 +98,12 @@ function Cart() {
                         <strong>Total</strong>
                         <strong>{`${(prices + 10).toFixed(2)}$`}</strong>
                     </Typography>
-                    <Button variant="contained" fullWidth={true}><strong>Make Order</strong></Button>
+                    <Button 
+                        onClick={createCheckOutSession}
+                        variant="contained" 
+                        fullWidth={true}>
+                        <strong>Make Order</strong>
+                    </Button>
                 </Paper>
             </Grid>
         </Grid>}
