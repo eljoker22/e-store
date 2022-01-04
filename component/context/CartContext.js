@@ -21,6 +21,9 @@ export const CartProvider = ({children}) => {
         const newArr = cartItems.filter((item) => item.id != id);
         setCart(newArr)
     }
+    const clearCart = () => {
+        setCart([]);
+    }
 
     useEffect(() => {
         // rerender when cart update
@@ -37,7 +40,7 @@ export const CartProvider = ({children}) => {
         setPrices(totalPrice);
     }, [cartItems, numRender])
     return(
-        <CartContext.Provider value={{cartItems, setCart, handleCount, removeProduct, prices}}>
+        <CartContext.Provider value={{cartItems, setCart, handleCount, removeProduct, clearCart, prices}}>
             {children}
         </CartContext.Provider>
     )

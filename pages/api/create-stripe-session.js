@@ -1,21 +1,32 @@
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 export default async function handler(req, res) {
-
-    
+    const { arrayProduct } = req.body;
+    const items = JSON.parse(arrayProduct);
     if (req.method === 'POST') {
         try {
+            console.log(arrayProduct)
+            const arr = [];
+            items.forEach(product => {
+                arr.push(
+                    {
+                    price_data: {
+                        currency: 'usd',
+                        product_data: {
+                            name: product.title,
+                            images: [product.image]
+                        },
+                        unit_amount: product.price * 100,
+                        },
+                        quantity: product.count,
+                    }
+                )
+            });
         // Create Checkout Sessions from body params.
         const session = await stripe.checkout.sessions.create({
-            line_items: [
-            {
-                // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-                price: 'price_1KC9fpFbFN1vjDJpLeAZHUiz',
-                quantity: 1,
-            },
-            ],
+            line_items: arr, // => array items come from front-end
             mode: 'payment',
-            success_url: `${req.headers.origin}/?success=true`,
+            success_url: `${req.headers.origin}/thankyou/id={CHECKOUT_SESSION_ID}`,
             cancel_url: `${req.headers.origin}/?canceled=true`,
         });
         res.redirect(303, session.url);

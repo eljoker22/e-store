@@ -12,7 +12,7 @@ import classes from '../styles/cart.module.css';
 import Image from 'next/image';
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { loadStripe } from '@stripe/stripe-js';
-import axios from 'axios';
+import axios from 'axios'
 
 const stripePromise = loadStripe(
     `${process.env.STRIPE_PUBLISHBLE_KEY}`
@@ -22,7 +22,6 @@ function Cart() {
 
     const {cartItems, handleCount, removeProduct, prices} = useContext(CartContext);
     const mediaQuery = useMediaQuery('(max-width: 768px)');
-
 
     return(
         <>
@@ -91,15 +90,18 @@ function Cart() {
                     <Typography variant="body1" paragraph={true} className={classes.detailPrice}>
                         <strong>Total</strong>
                         <strong>{`${(prices + 10).toFixed(2)}$`}</strong>
+                        {Math.round(prices)}
                     </Typography>
-                        <form action="/api/create-stripe-session" method="POST"> 
-                            <Button 
+                    <form action="/api/create-stripe-session" method="POST">
+                        <input type="hidden" name="arrayProduct" value={JSON.stringify(cartItems)} />  
+                        <Button 
+                            disabled={cartItems.length === 0 ? true : false}
                             type="submit"
                             variant="contained" 
                             fullWidth={true}>
                             <strong>Make Order</strong>
-                            </Button>
-                        </form>
+                        </Button>
+                    </form>
                 </Paper>
             </Grid>
         </Grid>}
