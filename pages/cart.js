@@ -1,4 +1,5 @@
 import React, {useContext, useState, useEffect} from 'react'
+import { PayPalButton } from "react-paypal-button-v2";
 import {CartContext} from '../component/context/CartContext'
 import Typography from '@mui/material/Typography'
 import Paper from '@mui/material/Paper';
@@ -14,6 +15,7 @@ import useMediaQuery from '@mui/material/useMediaQuery'
 import { loadStripe } from '@stripe/stripe-js';
 import axios from 'axios'
 
+
 const stripePromise = loadStripe(
     `${process.env.STRIPE_PUBLISHBLE_KEY}`
 );
@@ -22,7 +24,8 @@ function Cart() {
 
     const {cartItems, handleCount, removeProduct, prices} = useContext(CartContext);
     const mediaQuery = useMediaQuery('(max-width: 768px)');
-
+    const clientId = "Ae5rQmcLee78C-xXbpGIXMNWw952Jvb8rpR4-AwCXiAs1uh8lajq_zl84h96LyKaIMWw2pG6yCZcr8XJ";
+    
     return(
         <>
         <h1>Shoping Cart</h1>
@@ -95,13 +98,25 @@ function Cart() {
                     <form action="/api/create-stripe-session" method="POST">
                         <input type="hidden" name="arrayProduct" value={JSON.stringify(cartItems)} />  
                         <Button 
+                            style={{marginBottom: '15px', fontSize: '18px'}}
                             disabled={cartItems.length === 0 ? true : false}
                             type="submit"
                             variant="contained" 
                             fullWidth={true}>
-                            <strong>Make Order</strong>
+                            <strong>Chekout Card</strong>
                         </Button>
                     </form>
+                    <PayPalButton
+                        amount="0.01"
+                        // shippingPreference="NO_SHIPPING" // default is "GET_FROM_FILE"
+                        onSuccess={(details, data) => {
+                            console.log(details);
+                        // OPTIONAL: Call your server to save the transaction
+                        }}
+                        options={{
+                        clientId: clientId
+                        }}
+                    />
                 </Paper>
             </Grid>
         </Grid>}
